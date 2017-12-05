@@ -1,0 +1,10 @@
+retroGatewayImage: eahedav/retro-gateway:latest
+retroUserManagementImage: eahedav/retro-user-management:latest
+retroApiImage: eahedav/retro-api:latest
+
+serviceType: ClusterIP
+
+persistence:
+  enabled: false
+  accessMode: ReadWriteOnce
+  size: 8Gi

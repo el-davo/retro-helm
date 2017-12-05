@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "retro-gateway.fullname" . }}
+  labels:
+    app: {{ template "retro-gateway.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "retro-gateway.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "retro-gateway.fullname" . }}
+        image: "{{ .Values.retroGatewayImage }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        ports:
+        - name: web
+          containerPort: 3000
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m

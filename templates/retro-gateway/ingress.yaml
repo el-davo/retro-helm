@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name:  {{ template "retro-gateway.fullname" . }}
+  annotations:
+    nginx.org/rewrites: "serviceName=test-retro-gateway rewrite=/"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: {{ template "retro-gateway.fullname" . }}
+          servicePort: 8080

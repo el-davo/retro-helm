@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "retro-user-management.fullname" . }}
+  labels:
+    app: {{ template "retro-user-management.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "retro-user-management.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "retro-user-management.fullname" . }}
+        image: "{{ .Values.retroUserManagementImage }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        ports:
+        - name: web
+          containerPort: 3000
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 100m
