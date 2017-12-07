@@ -18,8 +18,7 @@ spec:
         image: "{{ .Values.retroUserManagementImage }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         ports:
-        - name: web
-          containerPort: 3000
+          - containerPort: 3000
         resources:
           requests:
             memory: 128Mi
